@@ -14,23 +14,22 @@ class Timer {
 
     start = () => {
         if (this.onStart) {
-            this.onStart();
+            this.onStart(this.timeRemaining);
         }
         this.tick();
-        this.stopId = setInterval(this.tick, 50);
+        this.stopId = setInterval(this.tick, 20);
     };
 
     tick = () => {
-        if (this.timeRemaining < 1) {
-            this.timeRemaining = 0;
+        if (this.timeRemaining == 0) {
             this.pause();
             if(this.onComplete) {
                 this.onComplete();
             }
         } else {
-            this.timeRemaining = this.timeRemaining - .05;
+            this.timeRemaining = this.timeRemaining - .02;
             if(this.onTick) {
-                this.onTick();
+                this.onTick(this.timeRemaining);
             }           
         }
 
